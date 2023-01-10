@@ -1142,6 +1142,7 @@ function FlatpickrInstance(
 
     const hourInput = createNumberInput("flatpickr-hour", {
       "aria-label": self.l10n.hourAriaLabel,
+      "disabled": true
     });
     self.hourElement = hourInput.getElementsByTagName(
       "input"
@@ -1149,6 +1150,7 @@ function FlatpickrInstance(
 
     const minuteInput = createNumberInput("flatpickr-minute", {
       "aria-label": self.l10n.minuteAriaLabel,
+      "disabled": true
     });
 
     self.minuteElement = minuteInput.getElementsByTagName(
@@ -1196,6 +1198,7 @@ function FlatpickrInstance(
 
       const secondInput = createNumberInput("flatpickr-second", {
       "aria-label": self.l10n.secondAriaLabel,
+      "disabled": true
     });
       self.secondElement = secondInput.getElementsByTagName(
         "input"
@@ -1947,7 +1950,7 @@ function FlatpickrInstance(
             e.relatedTarget as Node
           ))
       ) {
-        setTimeout(() => (self.hourElement as HTMLInputElement).select(), 50);
+          setTimeout(() => (self.hourElement as HTMLInputElement).focus(), 50);
       }
     }
   }
@@ -2014,6 +2017,11 @@ function FlatpickrInstance(
       ...JSON.parse(JSON.stringify(element.dataset || {})),
       ...instanceConfig,
     } as Options;
+
+    if (userConfig.disableMobile) {
+        userConfig.disableMobile = false;
+        userConfig.allowInput = false;
+    }
 
     const formats = {} as Record<"dateFormat" | "altFormat", string>;
 
@@ -2102,16 +2110,7 @@ function FlatpickrInstance(
       self.config[hook] = arrayify(self.config[hook] || []).map(bindToInstance);
     });
 
-    self.isMobile =
-      !self.config.disableMobile &&
-      !self.config.inline &&
-      self.config.mode === "single" &&
-      !self.config.disable.length &&
-      !self.config.enable &&
-      !self.config.weekNumbers &&
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
+    self.isMobile = false;
 
     for (let i = 0; i < self.config.plugins.length; i++) {
       const pluginConf = self.config.plugins[i](self) || ({} as Options);
