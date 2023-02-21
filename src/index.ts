@@ -2018,11 +2018,6 @@ function FlatpickrInstance(
       ...instanceConfig,
     } as Options;
 
-    if (userConfig.disableMobile) {
-        userConfig.disableMobile = false;
-        userConfig.allowInput = false;
-    }
-
     const formats = {} as Record<"dateFormat" | "altFormat", string>;
 
     self.config.parseDate = userConfig.parseDate;
