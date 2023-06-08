@@ -270,33 +270,11 @@
       content ""
       position absolute
 
-    &.arrowUp
-      top 0
-      border-bottom 0
-
-      &:after
-        border-left 4px solid transparent
-        border-right 4px solid transparent
-        border-bottom 4px solid alpha($dayForeground, 0.6)
-        top 26%
-
-    &.arrowDown
-      top 50%
-
-      &:after
-        border-left 4px solid transparent
-        border-right 4px solid transparent
-        border-top 4px solid alpha($dayForeground, 0.6)
-        top 40%
-
     svg
       width inherit
       height auto
       path
         fill alpha($monthForeground, 0.5)
-
-  &:hover
-    background: alpha($invertedBg, 0.05)
 
     span
       opacity 1
@@ -637,12 +615,6 @@ span.flatpickr-weekday
     height $timeHeight
     float left
 
-    span.arrowUp:after
-      border-bottom-color $dayForeground
-
-    span.arrowDown:after
-      border-top-color $dayForeground
-
   &.hasSeconds .numInputWrapper
     width 26%
 
@@ -694,10 +666,6 @@ span.flatpickr-weekday
     cursor pointer
     text-align center
     font-weight 400
-
-  input, .flatpickr-am-pm
-    &:hover, &:focus
-      background lighten($dayHoverBackground, 3)
 
 .flatpickr-input[readonly]
   cursor pointer

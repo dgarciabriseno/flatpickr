@@ -1641,6 +1641,18 @@ function FlatpickrInstance(
     }
   }
 
+  function focusOnNextElement(e: KeyboardEvent) {
+    const eventTarget = getEventTarget(e);
+    if (eventTarget == self.hourElement) {
+      self.minuteElement?.focus();
+    } else if (eventTarget == self.minuteElement) {
+      self.secondElement?.focus();
+    } else {
+      focusAndClose();
+    }
+    return (eventTarget as HTMLElement).classList.remove("active");
+  }
+
   function onKeyDown(e: KeyboardEvent) {
     // e.key                      e.keyCode
     // "Backspace"                        8
@@ -1670,7 +1682,6 @@ function FlatpickrInstance(
             ? self.config.altFormat
             : self.config.dateFormat
         );
-        self.close();
         return (eventTarget as HTMLElement).blur();
       } else {
         self.open();
@@ -1689,7 +1700,8 @@ function FlatpickrInstance(
           if (isTimeObj) {
             e.preventDefault();
             updateTime();
-            focusAndClose();
+            focusOnNextElement(e);
+            // focusAndClose();
           } else selectDate(e);
 
           break;
