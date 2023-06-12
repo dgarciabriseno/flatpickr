@@ -206,7 +206,7 @@ function FlatpickrInstance(
     updateValue();
 
     if (self._input.value !== prevValue) {
-      // self._debouncedChange();
+      self._debouncedChange();
     }
   }
 
