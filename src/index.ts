@@ -206,7 +206,7 @@ function FlatpickrInstance(
     updateValue();
 
     if (self._input.value !== prevValue) {
-      self._debouncedChange();
+      // self._debouncedChange();
     }
   }
 
@@ -1155,8 +1155,6 @@ function FlatpickrInstance(
       "input"
     )[0] as HTMLInputElement;
 
-    self.hourElement.tabIndex = self.minuteElement.tabIndex = -1;
-
     self.hourElement.value = pad(
       self.latestSelectedDateObj
         ? self.latestSelectedDateObj.getHours()
@@ -1214,12 +1212,17 @@ function FlatpickrInstance(
       self.secondElement.setAttribute("min", "0");
       self.secondElement.setAttribute("max", "59");
       self.secondElement.setAttribute("maxlength", "2");
+      self.secondElement.tabIndex = 0;
+      self.secondElement.enterKeyHint = "go";
 
       self.timeContainer.appendChild(
         createElement("span", "flatpickr-time-separator", ":")
       );
       self.timeContainer.appendChild(secondInput);
     }
+
+    self.hourElement.tabIndex = 0;
+    self.minuteElement.tabIndex = 0;
 
     if (!self.config.time_24hr) {
       // add self.amPM if appropriate
