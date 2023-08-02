@@ -250,11 +250,11 @@
   span
     position absolute
     right 0
-    width 14px
+    width 24px
     padding 0 4px 0 2px
     height 50%
     line-height 50%
-    opacity 0
+    opacity 1
     cursor pointer
     border 1px solid alpha($dayForeground, 0.15)
     box-sizing border-box
@@ -276,8 +276,8 @@
       path
         fill alpha($monthForeground, 0.5)
 
-    span
-      opacity 1
+  &:hover
+    background: alpha($invertedBg, 0.05)
 
 
 .flatpickr-current-month
@@ -615,6 +615,12 @@ span.flatpickr-weekday
     height $timeHeight
     float left
 
+    span.arrowUp:after
+      border-bottom-color $dayForeground
+
+    span.arrowDown:after
+      border-top-color $dayForeground
+
   &.hasSeconds .numInputWrapper
     width 26%
 
@@ -667,5 +673,51 @@ span.flatpickr-weekday
     text-align center
     font-weight 400
 
+  input, .flatpickr-am-pm
+    &:hover, &:focus
+      background lighten($dayHoverBackground, 3)
+
 .flatpickr-input[readonly]
   cursor pointer
+
+
+.flatpickr-time .numInputWrapper
+  .arrowUp
+    top 0
+    border-bottom 0
+    &:after
+      border-left 6px solid transparent
+      border-right 6px solid transparent
+      border-bottom 8px solid alpha($dayForeground, 0.6)
+      top 26%
+      left 5px
+
+  .arrowDown
+    top 50%
+
+    &:after
+      border-left 6px solid transparent
+      border-right 6px solid transparent
+      border-top 8px solid alpha($dayForeground, 0.6)
+      top 40%
+      left 5px
+
+.flatpickr-current-month .numInputWrapper
+  span
+    width: 14px
+    &.arrowUp
+      top 0
+      border-bottom 0
+      &:after
+        border-left 4px solid transparent
+        border-right 4px solid transparent
+        border-bottom 4px solid alpha($dayForeground, 0.6)
+        top 26%
+
+    &.arrowDown
+      top 50%
+      &:after
+        border-left 4px solid transparent
+        border-right 4px solid transparent
+        border-top 4px solid alpha($dayForeground, 0.6)
+        top 40%
